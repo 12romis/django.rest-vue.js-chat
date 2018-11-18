@@ -17,12 +17,13 @@ class RoomSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Room
-        fields = ("creator", "invited", "date")
+        fields = ("id", "creator", "invited", "date")
 
 
 class ChatSerializer(serializers.ModelSerializer):
     """ Chat serializer """
     user = UserSerializer()
+    date = serializers.DateTimeField(format="%H:%M:%S %d-%m-%Y")
 
     class Meta:
         model = Chat

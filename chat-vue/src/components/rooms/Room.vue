@@ -1,7 +1,14 @@
 <template>
     <div>
         <ul>
-            <li v-for="room in rooms">{{room.creator.username}} at {{room.date}}</li>
+            <li v-for="room in rooms">
+                <span @click="openDialog(room.id)" class="room">
+                    Room {{room.id}} of {{room.creator.username}} at {{room.date}}. Members of room:
+                </span>
+                <ul class="invited">
+                    <li v-for="u in room.invited">{{u.username}}</li>
+                </ul>
+            </li>
         </ul>
     </div>
 </template>
@@ -11,9 +18,10 @@
 
     export default {
         name: "room",
+        components: {},
         data(){
             return {
-                rooms: ''
+                rooms: '',
             }
         },
         created(){
@@ -34,6 +42,9 @@
                         this.rooms = response.data.data
                     }
                 })
+            },
+            openDialog(id) {
+                this.$emit("openDialog", id)
             }
         }
 
@@ -41,5 +52,7 @@
 </script>
 
 <style scoped>
-
+    span.room{
+        cursor: pointer;
+    }
 </style>
