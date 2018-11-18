@@ -1,13 +1,16 @@
 <template>
     <div>
-        <ul>
+        <ul class="rooms-ul">
             <li v-for="room in rooms">
-                <span @click="openDialog(room.id)" class="room">
-                    Room {{room.id}} of {{room.creator.username}} at {{room.date}}. Members of room:
-                </span>
-                <ul class="invited">
-                    <li v-for="u in room.invited">{{u.username}}</li>
-                </ul>
+                <p @click="openDialog(room.id)" class="room">
+                    Room {{room.id}} of {{room.creator.username}} at {{room.date}}.
+                </p>
+                <div class="room-members">
+                    Members of room:
+                    <ul class="invited">
+                        <li v-for="u in room.invited">{{u.username}}</li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>
@@ -19,14 +22,14 @@
     export default {
         name: "room",
         components: {},
-        data(){
+        data() {
             return {
                 rooms: '',
             }
         },
-        created(){
+        created() {
             let auth_token = localStorage.getItem('auth_token');
-            if(auth_token){
+            if (auth_token) {
                 $.ajaxSetup({
                     headers: {'Authorization': 'Token ' + auth_token}
                 })
@@ -34,7 +37,7 @@
             this.loadRoom()
         },
         methods: {
-            loadRoom(){
+            loadRoom() {
                 $.ajax({
                     url: 'http://127.0.0.1:8000/api/v1/chat/room',
                     type: "GET",
@@ -52,7 +55,16 @@
 </script>
 
 <style scoped>
-    span.room{
+    p.room {
         cursor: pointer;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+    .room-members{
+        text-align: left;
+    }
+    .rooms-ul{
+        list-style: none;
+        text-align: left;
     }
 </style>

@@ -14,6 +14,7 @@ class RoomSerializer(serializers.ModelSerializer):
     """ Chat room serializer """
     creator = UserSerializer()
     invited = UserSerializer(many=True)
+    date = serializers.DateTimeField(format="%H:%M:%S %d-%m-%Y")
 
     class Meta:
         model = Room

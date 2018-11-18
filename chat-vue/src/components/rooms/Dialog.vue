@@ -1,9 +1,20 @@
 <template>
     <div>
         <div v-for="dialog in dialogs">
-            <h3>{{dialog.user.username}} (<span class="date">{{dialog.date}}</span>)</h3>
+            <h3>{{dialog.user.username}} (
+                <small class="date">{{dialog.date}}</small>
+                )
+            </h3>
             <p>{{dialog.text}}</p>
         </div>
+        <br>
+        <hr>
+        <mu-text-field v-model="msg" placeholder="Write here your message to the chat"
+                       multi-line :rows="2" :rows-max="8" full-width>
+        </mu-text-field>
+        <mu-flex justify-content="center" align-items="center">
+            <mu-button round color="success">Send message</mu-button>
+        </mu-flex>
     </div>
 </template>
 
@@ -18,6 +29,7 @@
         data() {
             return {
                 dialogs: '',
+                msg: ''
             }
         },
         created() {
