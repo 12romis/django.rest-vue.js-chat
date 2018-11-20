@@ -1,9 +1,9 @@
 <template>
     <div>
         <mu-appbar style="width: 100%;" color="primary">
-            <mu-button icon slot="left">
-                <mu-icon value="menu"></mu-icon>
-            </mu-button>
+            <!--<mu-button icon slot="left">-->
+                <!--<mu-icon value="menu"></mu-icon>-->
+            <!--</mu-button>-->
             Chat using django rest and vue.js
             <mu-button v-if="!auth" @click="goLogin" flat slot="right">Login</mu-button>
             <mu-button v-else @click="logout" flat slot="right">LogOut</mu-button>

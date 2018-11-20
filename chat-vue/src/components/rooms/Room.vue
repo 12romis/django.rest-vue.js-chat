@@ -1,24 +1,20 @@
 <template>
     <div>
-        <ul class="rooms-ul">
-            <li v-for="room in rooms">
-                <p @click="openDialog(room.id)" class="room">
-                    Room {{room.id}} of {{room.creator.username}} at {{room.date}}.
-                </p>
-                <div class="room-members">
-                    Members of room:
-                    <ul class="invited">
-                        <li v-for="u in room.invited">{{u.username}}</li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
+        <mu-paper v-for="room in rooms" class="demo-paper room" :z-depth="3">
+            <p @click="openDialog(room.id)" class="room-title">
+                Room {{room.id}} by {{room.creator.username}} at {{room.date}}.
+            </p>
+            <div class="room-members">
+                 Members of room:
+                <ul class="invited">
+                    <li v-for="u in room.invited">{{u.username}}</li>
+                </ul>
+            </div>
+        </mu-paper>
     </div>
 </template>
 
 <script>
-    import $ from 'jquery'
-
     export default {
         name: "room",
         components: {},
@@ -55,16 +51,25 @@
 </script>
 
 <style scoped>
-    p.room {
+    p.room-title {
         cursor: pointer;
         font-weight: bold;
         margin-bottom: 0;
     }
-    .room-members{
+
+    .room-members {
         text-align: left;
+        padding-left: 5px;
     }
-    .rooms-ul{
-        list-style: none;
+
+    .room {
         text-align: left;
+        padding-left: 5px;
+        list-style: none;
+        margin: 10px;
+    }
+    ul.invited{
+        list-style: circle;
+        margin-top: 0;
     }
 </style>
